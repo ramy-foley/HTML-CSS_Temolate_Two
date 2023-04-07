@@ -1,0 +1,1077 @@
+/*start variables*/
+:root {
+  --main-color: #19c8fa;
+  --transparent-color: rgb(15 116 143 / 70%);
+  --section-padding: 100px;
+}
+/*end variables*/
+
+/*start global rules  the rules that all elements in our website will follow ----------------------------- */
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; /*to respect and take our padding and margin in calculations */
+  padding: 0; /*reset all elements*/
+  margin: 0; /*reset all elements*/
+}
+html {
+  scroll-behavior: smooth; /*to make the scroll in our website smoothly */
+}
+body {
+  font-family: "Open Sans", sans-serif; /*our fonts in website*/
+}
+
+ul {
+  list-style: none; /*to delete all decorations from ul in the website ul elements*/
+}
+
+.container {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/*small screen (phones) start from 768px*/
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+
+/*medium screen  start from 992px*/
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+
+/*large screen  start from 1200px*/
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+/*end global rules-----------------------------------------------------------------------------*/
+
+/*start the components-------------------------------------------------------------------------*/
+.section {
+  padding: 100px;
+}
+.main-heading {
+  text-align: center; /*to center all words in the middle of the section*/
+}
+.main-heading h2 {
+  font-weight: normal;
+  font-size: 40px;
+  position: relative; /*we will make before and after and distribute elements according to the parent h2*/
+  margin-bottom: 70px; /*to make space under the h2*/
+  text-transform: uppercase; /*make h2 uppercase*/
+}
+/*the line under the h2*/
+.main-heading h2::before {
+  content: "";
+  position: absolute; /*distribute the elements freely*/
+  left: 50%; /*to center the element*/
+  transform: translateX(-50%); /*to center the element*/
+  height: 2px; 
+  background: #333;
+  width: 120px;
+  bottom: -30px; /*get the element under h2 by -30px*/
+}
+.main-heading h2::after {
+  content: "";
+  position: absolute; /*distribute the elements freely*/
+  left: 50%; /*to center the element*/
+  transform: translateX(-50%); /*to center the element*/
+  width: 14px;
+  height: 14px;
+  border-radius: 50%; /*to the element o*/
+  border: 2px solid #333;
+  bottom: -38px; /*get the element align in the before element in the middle*/
+  background-color: white;
+}
+.main-heading p {
+  width: 550px; /*we want to make p not take full width just take 550px and the rest of words cut and move to new line*/
+  margin: 0 auto 100px; /*to make space from bottom only between the p and new section will come in the future*/
+  max-width: 100%;/*to take full width in all screens*/
+  line-height: 2;
+  color: #777;
+}
+/*end the components-------------------------------------------------------------------------*/
+
+/*start Header*/
+
+header {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+}
+header .container {
+  display: flex; /*make the header flex*/
+  justify-content: space-between; /*make the elements display in one line and make space between them*/
+  align-items: center; /*make the elements to be centered in the vertical line axis |*/
+  position: relative; /*we gave the parent position relative to prevent the elements to not go out of the parent*/
+  min-height: 97px;
+}
+
+/*the line under the header we use pseudo element to made it*/
+header .container::after {
+  content: " ";
+  position: absolute; /*to move free but not go out of the parent because the parent took position relative*/
+  height: 1px; /*the height of the line*/
+  width: calc(100% - 30px); /*the width of the line is 100% and we discount 30px of the container padding  */
+  background-color: #a2a2a2; /*the color of the line */
+  bottom: 0; /*make the line to be at the bottom of the header */
+  left: 15px; /*to make the line start after the padding and to end before the padding ,make it centered in the middle */
+}
+header .logo img {
+  height: 40px;
+}
+header nav {
+  flex: 1; /*to make the nav take the rest of the space of the header */
+  display: flex; /*to make us can display and make elements of the nav ul and search icon on one line */
+  align-items: center; /*to make all elements to be on one line -----*/
+  justify-content: flex-end; /*to make all elements to be at the end of the header*/
+}
+/*the menu which will display in phone screen*/
+header nav .toggle-menu {
+  color: white;
+  font-size: 22px;
+}
+/*media after the small screen disappear the toggle menu*/
+@media (min-width: 768px) {
+  header nav .toggle-menu {
+    display: none;
+  }
+}
+header nav ul {
+  display: flex; /*to make us can display and make elements of the ul links on one line */
+}
+
+@media (max-width: 767px) {
+  header nav ul {
+    display: none; /* when it become less than 767px diapered*/
+  }
+
+  header nav .toggle-menu:hover + ul {
+    display: flex; /* when it become less than 767px display flex*/
+    flex-direction: column; /*display the ul in columns*/
+    position: absolute; /*to control it freely*/
+    top: 100%; /*take full space of the top*/
+    left: 0; /*start from the left*/
+    width: 100%; /*take the full width*/
+    background-color: rgb(0 0 0 / 50%);
+  }
+  header nav ul li a {
+    padding: 15px !important;
+  }
+}
+
+header nav ul li a {
+  padding: 40px 10px; /*we use 40px from top and bottom and 10px from right and left */
+  display: block; /*to respect the margin and padding and height and width*/
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  transition: 0.3s; /*we will use hover and this property to take 0.3s to make an action */
+  position: relative;
+  z-index: 2;
+}
+header nav ul li a.active,
+header nav ul li a:hover {
+  color: var(--main-color); /*when we click on links change color to take the main color */
+  border-bottom: 1px solid var(--main-color); /*when we click on links make a border and color it the main color */
+}
+
+header nav .form {
+  width: 40px; /*the width of the div of the icon*/
+  height: 30px; /*the height of the div of the icon*/
+  position: relative; /*we give the div position relative to control the icon */
+  margin-left: 30px; /*we made 30px from the left from other link we need space */
+  border-left: 1px solid white; /*we made a border from the left*/
+}
+
+header nav .form i {
+  position: absolute; /*we give the icon position absolute to control the icon freely but not go out of the div */
+  color: white;
+  font-size: 20px; /* size of the icon  */
+  top: 50%; /*to make icon in the middle ---- */
+  transform: translateY(-50%); /*to make the icon centered*/
+  right: 0; /*to make the icon start from the right the border in left the icon in right*/
+}
+
+/*end Header*/
+
+/*start landing*/
+.landing {
+  min-height: 100vh; /*to fit full screen of the website */
+  background-color: #ccc;/*second color if the background of the section not worked*/
+  background-image: url(../imges/landing.jpg); /*the background of the landing section*/
+  background-size:cover; /*to fit the landing section in perfect way */
+  position: relative; /*to set the overlay shadow on the background */
+} 
+/*the overlay shadow*/
+.landing .overlay {
+  position: absolute; /*to control the shadow smoothly*/
+  left: 0; /*start from the left */
+  top: 0; /*start from the top*/
+  width: 100%; /*fit the width 100%*/
+  height: 100%; /*fit the width 100%*/
+  background-color: rgb(0 0 0 / 60%);/*color of the shadow*/
+}
+
+/*the div which contain the all texts and content of the landing section*/
+.landing .text {
+  position: absolute; /*to control it freely in the page*/
+  left: 0; /*start from left */
+  top: 50%; /*to center the div in center of landing section*/
+  transform: translateY(-50%); /*to center the div in center vertically of landing section*/
+  width: 50%; /*to set only 50% of div in width*/
+  padding: 40px; /*to make some edges from top bottom left right*/
+  background-color: var(--transparent-color);
+  color: white;
+  display: flex; /*to control the text and moved it */
+  justify-content: flex-end; /*to move the text and make it start from the end of the div*/
+}
+
+.landing .text .content {
+  max-width: 500px; /*to set only 500px to stretch of the content that allow the flex to work justify content:flex-end*/
+}
+/*start from 0 to 767px*/
+@media (max-width: 767px) {
+  .landing .text {
+    width: 100%; /*display full width of screen when it become from 0 to 767px*/
+  }
+  .landing .text .content {
+    max-width: 100%;
+  }
+}
+.landing .content h2 {
+  font-size: 32px;
+  font-weight: normal;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+.landing .content p {
+  font: 14px;
+  line-height: 2;
+}
+/*the two icons of <>*/
+.landing .change-background {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #ddd;
+}
+
+@media (max-width: 767px) {
+  .landing .change-background {
+    display: none;/*from 0 to 767px display none to the two <>*/
+  }
+}
+.landing .fa-angle-left {
+  left: 30px;
+}
+
+.landing .fa-angle-right {
+  right: 30px;
+}
+/*the three ooo*/
+.landing .bullets {
+  position: absolute;/*to control them freely*/
+  left: 47%; /*start from 47%*/
+  transform: translateY(-50%); /*centered them vertically*/
+  bottom: 30px; /*start from the bottom 30px*/
+  display: flex; /*to display in one line*/
+}
+/*the three ooo*/
+.landing .bullets li {
+  width: 20px;
+  height: 20px;
+  border: 1px solid white;
+  border-radius: 50%;
+  margin-left: 5px;
+}
+.landing .bullets li.active {
+  background-color: var(--main-color);
+  border-color: var(--main-color);
+}
+/*end landing*/
+
+/*start services*/
+.services {
+  padding-top: var(--section-padding);
+  padding-bottom: var(--section-padding);
+}
+/*from 768 and larger display the service-container grid*/
+@media (min-width: 768px) {
+  .services .services-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(450px, 1fr));
+    gap: 40px 60px;
+  }
+}
+.services .srv-box {
+  display: flex;
+  justify-content: space-between;
+}
+@media (max-width: 768px) {
+  .services .srv-box {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .services .srv-box i {
+    margin: 0 60px 30px;
+  }
+}
+.services .srv-box i {
+  margin-right: 50px;
+}
+.services .srv-box h3 {
+  margin-bottom: 30px;
+  color: var(--main-color);
+}
+.services .srv-box p {
+  line-height: 2;
+  color: #777;
+}
+/*end services*/
+
+/*start Design*/
+.design {
+  padding-top: var(--section-padding);
+  padding-bottom: var(--section-padding);
+  height: 600px;
+  position: relative;
+  background-image: url(../imges/design-features.jpg);
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.design::before {
+  content: "";
+  position: absolute; /*to control the shadow smoothly*/
+  left: 0; /*start from the left */
+  top: 0; /*start from the top*/
+  width: 100%; /*fit the width 100%*/
+  height: 100%; /*fit the width 100%*/
+  background-color: rgb(0 0 0 / 60%);/*color of the shadow*/
+}
+.design .image,
+.design .text {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+}
+.design .image {
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .design .image {
+    display: none;
+  }
+}
+.design .image img {
+  position: relative;
+  bottom: -150px;
+}
+.design .text {
+  color: white;
+  padding: 50px;
+  background-color: var(--transparent-color);
+}
+.design .text h2 {
+  font-weight: normal;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+}
+.design .text ul li {
+  padding: 15px 0;
+}
+.design .text ul li::before {
+  font-family: 'Font Awesome 5 Free';
+  content: "\f108";
+  font-weight: 900;
+  position: relative;
+  left: -15px;
+}
+/*end Design*/
+
+
+/*start portfolio*/
+.portfolio {
+  padding-top: var(--section-padding); /*the main padding of the section*/
+  padding-bottom: var(--section-padding); /*the main padding of the section*/
+}
+
+.portfolio .shuffle {
+  display: flex; /*to display ul elements in one line - - - - */
+  justify-content: center; /* to make the elements in the center of the main axis -----*/
+}
+
+.portfolio .shuffle li {
+  padding: 10px;
+}
+.portfolio .shuffle li.active {
+  background-color: var(--main-color);
+  color: white;
+}
+/*the container hold the boxes of the images*/
+.portfolio .imgs-container {
+  display: flex; /*to display ul elements in one line - - - - */
+  flex-wrap: wrap; /*every image after the full move to new line  */
+  margin-top: 60px; /*to make space from top the main-heading*/
+  
+}
+.portfolio .imgs-container .box {
+  flex-basis: 25%; /*every box contain img and caption we want every box take only 25%*/
+  position: relative; /*we will move caption and we gave relative to the parent*/
+  overflow: hidden; /*we move the caption by position absolute and they go down we give hidden to not go out of the imgs container*/
+}
+.portfolio .imgs-container .box:hover .caption {
+  bottom: 0; /*when we make hover return the caption to start from bottom 0*/
+}
+.portfolio .imgs-container .box:hover img {
+  transform: rotate(3deg) scale(1.1); /* when we make hover the imgs will rotate and scale*/
+}
+/*small screens*/
+@media (max-width: 768px) {
+  .portfolio .imgs-container .box {
+    flex-basis: 100%;
+  }
+}
+/*medium screens*/
+@media (min-width: 768px) {
+  .portfolio .imgs-container .box {
+    flex-basis: 50%;
+  }
+}
+/*large screens*/
+@media (min-width: 1199px) {
+  .portfolio .imgs-container .box {
+    flex-basis: 25%;
+  }
+}
+
+.portfolio .imgs-container .box img {
+  max-width: 100%; /*the photo fit the content*/
+  transition: 0.3s;
+}
+
+.portfolio .imgs-container .box .caption {
+  position: absolute; /*we move the caption freely*/
+  left: 0; /*start the caption from the left of the img*/
+  padding: 20px;
+  background-color: white;
+  width: 100%; /*take the full width of the imgs after the transition*/
+  transition: 0.3s;
+  bottom: -100%; /* go down -100% because we will display in normal way after the hover*/
+
+}
+.portfolio .imgs-container .box .caption h4 {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.portfolio .imgs-container .box .caption p {
+  color: var(--main-color);
+}
+.portfolio .more {
+  background-color: var(--main-color);
+  color: white;
+  padding: 15px 20px;
+  display: block; /*respect the margin and height and width and padding */
+  width: fit-content; /*fit the content only*/
+  margin: 30px auto;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+/*end portfolio*/
+
+
+/*start video*/
+.video {
+  position: relative;
+
+}
+.video::before {
+  content: " ";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(0 0 0 / 40%);
+  z-index: 2;
+}
+.video video {
+  width: 100%;
+}
+.video .text {
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 50px;
+  background-color: var(--transparent-color);
+  color: white;
+  text-align: center;
+  z-index: 2;
+
+}
+.video .text h2 {
+  margin: 0 0 30px;
+  text-transform: uppercase;
+  font-weight: normal;
+}
+.video .text p {
+  margin-bottom: 30px;
+}
+.video .text button {
+  background-color: black;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  text-transform: uppercase;
+}
+/*end video*/
+
+/*start about*/
+.about {
+  padding-top: var(--section-padding);
+  overflow: hidden;
+  text-align: center;
+}
+.about img {
+  position: relative;
+  bottom: -120px;
+  margin-top: -120px;
+  max-width: 100%;
+}
+@media (max-width: 767px) {
+  .about img {
+    bottom: -60px;
+    margin-top: -60px;
+  }
+}
+/*end about*/
+
+/*start stats*/
+.stats {
+  padding-top: var(--section-padding);
+  padding-bottom: var(--section-padding);
+  text-align: center;
+  background-image: url(/imges/stats.png);
+  background-size: cover;
+  position: relative;
+}
+.stats::before {
+  content:  " ";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(0 0 0 / 70%);
+
+}
+.stats .container {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.stats .container .box {
+  color: white;
+  padding: 50px;
+  background-color: var(--transparent-color);
+}
+
+@media (max-width: 767px) {
+  .stats .container .box {
+    flex-basis: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  .stats .container .box {
+    flex-basis: 50%;
+  }
+}
+@media (min-width: 991px) {
+  .stats .container .box {
+    flex-basis: 50%;
+  }
+}
+@media (min-width: 1199px) {
+  .stats .container .box {
+    flex-basis: 25%;
+  }
+}
+
+.stats .container .box i {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  background-color: black;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  margin: 0 auto 30px;
+}
+
+.stats .container .box .number {
+  font-size: 50px;
+  font-weight: bold;
+  margin: 0 0 20px;
+}
+
+.stats .container .box p {
+  font-size: 14px;
+}
+/*end stats*/
+
+/*start skills*/
+.our-skills {
+  padding-top: var(--section-padding);
+  padding-bottom: var(--section-padding);
+}
+.our-skills .container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+@media (min-width: 992px) {
+  .our-skills .container > div {
+    flex-basis: 45%;
+  }
+}
+
+.our-skills .container > div > h3 {
+  margin: 0 0 30px ;
+  font-weight: normal;
+  text-align: center;
+  text-transform: uppercase;
+}
+.our-skills .container > div > p {
+  color: #777;
+  line-height: 2;
+  text-align: center;
+  margin-bottom: 60px;
+}
+.our-skills .testimonials .content {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+.our-skills .testimonials .content img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-right: 50px;
+}
+@media (max-width: 767px) {
+  .our-skills .testimonials .content {
+      flex-direction: column;
+      text-align: center;
+  }
+  .our-skills .testimonials .content img {
+    margin: 0 auto 20px;
+  }
+}
+.our-skills .testimonials .text {
+  line-height: 1.8;
+  border-bottom: 1px solid #ccc;
+}
+.our-skills .testimonials .text p {
+  color: #777;
+  text-align: right;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+.our-skills .testimonials .bullets {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+.our-skills .testimonials .bullets li {
+  width: 14px;
+  height: 14px;
+  border: 1px solid #aaa;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.our-skills .testimonials .bullets li.active {
+  background-color: var(--main-color);
+  border-color: var(--main-color);
+}
+.our-skills .skills .prog-holder {
+  margin-bottom: 40px;
+}
+.our-skills .skills .prog-holder h4 {
+  margin-bottom: 15px;
+  font-weight: normal;
+  text-transform: uppercase;
+}
+.our-skills .skills .prog-holder .prog {
+  background-color: #dedadc;
+  height: 30px;
+}
+.our-skills .skills .prog-holder .prog span {
+  display: block;
+  background-color: var(--main-color);
+  height: 100%;
+  position: relative;
+}
+.our-skills .skills .prog-holder .prog span::before {
+  content: attr(data-progress);
+  position: absolute;
+  background-color: black;
+  color: white;
+  top: -40px;
+  right: -18px;
+  padding: 4px 0;
+  width: 40px;
+  text-align: center;
+  border-radius: 4px;
+
+}
+.our-skills .skills .prog-holder .prog span::after {
+  content: " ";
+  position: absolute;
+  border-style: solid;
+  border-width: 8px;
+  border-color: black transparent transparent transparent;
+  right: -8px;
+  top: -15px;
+}
+/*end skills*/
+
+/*start quote*/
+.quote {
+  padding-top: var(--section-padding);
+  padding-bottom: var(--section-padding);
+  background-image: url(/imges/quote.jpg);
+  background-size: cover;
+  position: relative;
+  text-align: center;
+  color: white;
+}
+.quote::before {
+  content: " ";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(0 0 0 / 70%);
+}
+.quote .container {
+  position: relative;
+}
+.quote q {
+    display: block;
+    font-size: 30px;
+    margin-bottom: 30px;
+}
+/*end quote*/
+
+/*start pricing*/
+.pricing {
+  padding-top: var(--section-padding);
+  padding-bottom: var(--section-padding);
+}
+.pricing .plans {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(250px , 1fr));
+  gap: 30px;
+}
+.pricing .plans .plan {
+  background-color: #fcfcfc;
+  text-align: center;
+}
+.pricing .plans .plan .head {
+  padding: 40px 20px;
+  border-top: 1px solid var(--main-color);
+  border-bottom: 1px solid var(--main-color);
+}
+.pricing .plans .plan .head h3 {
+  font-weight: normal;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+.pricing .plans .plan .head span {
+  font-size: 60px;
+  font-weight: 600;
+}
+.pricing .plans .plan .head span::before {
+  content: "$";
+  font-size: 25px;
+  position: relative;
+  top: -40px;
+  margin-right: 15px;
+  font-weight: normal;
+}
+.pricing .plans .plan .head span::after {
+  content: "/Mo";
+  font-size: 20px;
+  position: relative;
+  font-weight: normal;
+  margin-left: 15px;
+}
+.pricing .plans .plan  ul {
+  border-bottom: 1px solid var(--main-color);
+}
+.pricing .plans .plan ul li {
+  padding: 20px;
+  position: relative;
+
+}
+
+.pricing .plans .plan ul li:not(:last-child)::after {
+  content: " ";
+  width: 120px;
+  height: 1px;
+  background-color: var(--main-color);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+}
+.pricing .plans .plan .foot a {
+  display: block;
+  padding: 20px 20px;
+  text-decoration: none;
+  border: 1px solid var(--main-color);
+  width: fit-content;
+  margin: 30px auto;
+  color: #777;
+}
+.pricing .contact-text {
+  text-align: center;
+  margin: 50px auto 20px;
+  font-size: 18px;
+}
+.pricing .contact-link {
+  display: block;
+  width: fit-content;
+  margin: 20px auto;
+  background-color: var(--main-color);
+  color: white;
+  text-decoration: none;
+  padding: 15px 30px;
+}
+/*end pricing*/
+
+/*start subscribe*/
+.subscribe {
+  padding-top: var(--section-padding);
+  padding-bottom: var(--section-padding);
+  background-image: url(/imges/subscribe.jpg);
+  background-size: cover;
+  position: relative;
+  color: white;
+}
+.subscribe::before {
+  content: " ";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(0 0 0 / 70%);
+}
+.subscribe .container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 991px) {
+  .subscribe .container {
+    flex-direction: column;
+  }
+}
+
+.subscribe form {
+  display: flex;
+  position: relative;
+  width: 500px;
+  max-width: 100%;
+}
+
+.subscribe form i {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 25px;
+}
+
+.subscribe form input[type="email"] {
+  border: 1px solid white;
+  border-right: none;
+  background: none;
+  padding: 20px 20px 20px 60px;
+  caret-color: var(--main-color);
+  width: calc(100% - 130px);
+}
+
+.subscribe form input[type="submit"] {
+  width: 130px;
+  background-color: var(--main-color);
+  color: white;
+  padding: 10px 20px;
+  border: 1px solid white;
+  border-left: none;
+  text-transform: uppercase;
+}
+.subscribe form input[type="email"]:focus,
+.subscribe form input[type="email"]:focus {
+  outline: none;
+}
+.subscribe form ::placeholder {
+  color: white;
+}
+.subscribe p {
+  line-height: 2;
+  margin-left: 50px;
+}
+@media (max-width: 991px) {
+  .subscribe p {
+    margin: 30px 0 0;
+  }
+}
+/*end subscribe*/
+
+/*start contact*/
+.contact {
+  padding-top: var(--section-padding);
+  padding-bottom: var(--section-padding);
+}
+.contact .content {
+  display: flex;
+  justify-content: space-between;
+}
+@media (max-width: 767px) {
+  .contact .content {
+    flex-direction: column;
+  }
+}
+.contact .content form {
+  flex-basis: 70%;
+}
+.contact .content form .main-input {
+  padding: 20px;
+  display: block;
+  border: 1px solid #ccc;
+  margin-bottom: 30px;
+  width: 100%;
+}
+.contact .content form .main-input:focus {
+  outline: none;
+}
+.contact .content form textarea.main-input {
+  height: 200px;
+}
+
+.contact .content form input[type="submit"] {
+  background-color: var(--main-color);
+  color: white;
+  padding: 20px;
+  border: none;
+  display: flex;
+  margin-left: auto;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.contact .content .info {
+  flex-basis: 25%;
+}
+@media (max-width: 767px) {
+  .contact .content .info {
+    order: -1;
+    text-align: center;
+  }
+}
+.contact .content .info h4 {
+  text-transform: uppercase;
+  margin-bottom: 30px;
+  font-weight: 500;
+  font-size: 18px;
+}
+.contact .content .phone {
+  display: block;
+  color: #777;
+  margin-bottom: 10px;
+}
+.contact .content h4:nth-of-type(2) {
+  margin-top: 90px;
+}
+@media (max-width: 767px) {
+  .contact .content h4:nth-of-type(2) {
+    margin-top: 30px;
+  }
+}
+.contact .content .info address {
+  color: #777;
+  line-height: 2;
+}
+@media (max-width: 767px) {
+  .contact .content .info address {
+    margin-bottom: 40px;
+  }
+}
+/*end contact*/
+
+/*start footer*/
+.footer {
+  padding-top: calc(var(--section-padding) / 2);
+  padding-bottom: calc(var(--section-padding) / 2);
+  background-image: url(/imges/subscribe.jpg);
+  background-size: cover;
+  position: relative;
+  color: white;
+  text-align: center;
+
+}
+.footer::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(0 0 0 / 70%);
+}
+.footer .container {
+  position: relative;
+}
+.footer img {
+  margin: 0 0 20px;
+}
+.footer p:not(.copyright) {
+  text-transform: uppercase;
+  padding: 20px;
+  border-bottom: 1px solid white;
+  font-size: 22px;
+  width: fit-content;
+  margin: 20px auto;
+}
+.footer .social-icons i {
+  padding: 10px 15px;
+}
+.footer .copyright {
+  margin-top: 60px;
+
+}
+.footer .copyright span {
+  font-weight: bold;
+  color: var(--main-color);
+}
+/*end footer*/
